@@ -31,9 +31,15 @@ class SessionsController extends \BaseController {
 	{
 		$this->loginForm->validate($input = Input::only('email', 'password'));
 
-		if (Auth::attempt($input))
+		if(Input::get('remember') == 'remember')
 		{
-			return Redirect::intended('/');
+			if (Auth::attempt($input, true)) return Redirect::intended('/');
+		}
+
+		else
+		{
+			if (Auth::attempt($input)) return Redirect::intended('/');
+
 		}
 
 		return Redirect::back()->withInput()->withFlashMessage('Invalid credentials provided');

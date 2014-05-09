@@ -1,8 +1,8 @@
 <?php
 
 
-# Home
-Route::get('/', ['as' => 'home', 'uses' => 'PagesController@index']);
+# Static Pages
+Route::get('/', ['as' => 'home', 'uses' => 'PagesController@getHome']);
 
 # Registration
 Route::get('/register', 'RegistrationController@create')->before('guest');
@@ -15,9 +15,9 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy'])
 Route::resource('sessions', 'SessionsController' , ['only' => ['create','store','destroy']]);
 
 # Forgotten Password
-Route::get('forgot_password', 'RemindersController@getRemind');
+Route::get('forgot_password', 'RemindersController@getRemind')->before('guest');;
 Route::post('forgot_password','RemindersController@postRemind');
-Route::get('reset_password/{token}', 'RemindersController@getReset');
+Route::get('reset_password/{token}', 'RemindersController@getReset')->before('guest');;
 Route::post('reset_password/{token}', 'RemindersController@postReset');
 
 

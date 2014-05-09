@@ -19,6 +19,12 @@
 			{{ errors_for('password', $errors) }}
 		</div>
 
+		<!-- Remember me field -->
+		<div class="form-group">
+			{{ Form::label('remember', 'Remember Me? ')}}
+			{{ Form::checkbox('remember', 'remember') }}
+		</div>
+
 		<!-- Submit field -->
 		<div class="form-group">
 			{{ Form::submit('Login', ['class' => 'btn btn-primary']) }}

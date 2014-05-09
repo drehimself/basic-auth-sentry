@@ -28,10 +28,12 @@
 	<header>
 		<ul>
 			<li><a href="/">Home</a></li>
-			<li><a href="/register">Register</a></li>
+
 
 			@if (Auth::guest())
+				<li><a href="/register">Register</a></li>
 				<li><a href="/login">Login</a></li>
+				<li><a href="/forgot_password">Forgot Password</a></li>
 			@else
 				<li><a href="/logout">Logout</a></li>
 			@endif

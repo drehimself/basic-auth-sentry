@@ -14,15 +14,7 @@ class RegistrationController extends \BaseController {
 		$this->registrationForm = $registrationForm;
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		return View::make('registration.index');
-	}
+
 
 	/**
 	 * Show the form for creating a new resource.

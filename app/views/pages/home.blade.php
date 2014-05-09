@@ -2,6 +2,12 @@
 
 @section('content')
 
+	@if (Session::has('flash_message'))
+		<div class="form-group">
+			<p>{{ Session::get('flash_message') }}</p>
+		</div>
+	@endif
+
 	{{ Auth::check() ? "Welcome, " . Auth::user()->username: "Why don't you sign up?" }}
 
 	<br><br>
