@@ -1,6 +1,6 @@
 <?php
 
-use fotoApp\formValidation\ForgotPasswordForm;
+use basicAuth\formValidation\ForgotPasswordForm;
 
 class RemindersController extends Controller {
 

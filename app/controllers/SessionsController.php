@@ -1,6 +1,6 @@
 <?php
 
-use fotoApp\formValidation\LoginForm;
+use basicAuth\formValidation\LoginForm;
 
 class SessionsController extends \BaseController {
 

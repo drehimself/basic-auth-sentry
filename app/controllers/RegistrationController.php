@@ -1,6 +1,6 @@
 <?php
 
-use fotoApp\formValidation\RegistrationForm;
+use basicAuth\formValidation\RegistrationForm;
 
 class RegistrationController extends \BaseController {
 

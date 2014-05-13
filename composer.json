@@ -16,9 +16,9 @@
 			"app/database/seeds",
 			"app/tests/TestCase.php"
 		],
-		"files": ["app/fotoApp/helpers.php"],
+		"files": ["app/basicAuth/helpers.php"],
 		"psr-4": {
-			"fotoApp\\": "app/fotoApp"
+			"basicAuth\\": "app/basicAuth"
 		}
 	},
 	"scripts": {

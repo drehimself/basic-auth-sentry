@@ -1,4 +1,4 @@
-<?php namespace fotoApp\formValidation;
+<?php namespace basicAuth\formValidation;
 
 use Laracasts\Validation\FormValidator;
 
