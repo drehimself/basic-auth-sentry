@@ -1,16 +1,12 @@
-@extends('layout')
+@extends('master')
 
 @section('content')
 
-	@if (Session::has('flash_message'))
-		<div class="form-group">
-			<p>{{ Session::get('flash_message') }}</p>
-		</div>
-	@endif
 
-	{{ Sentry::check() ? "Welcome, " . Sentry::getUser()->first_name: "Why don't you sign up?" }}
+	<h1>Landing Page</h1>
 
-	<br><br>
+	<p>
 	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, veniam earum aspernatur hic ullam culpa beatae ipsum placeat consequatur possimus. Eaque!
+	</p>
 
 @stop

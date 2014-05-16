@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('master')
 
 @section('content')
 	<form action="{{ action('RemindersController@postReset') }}" method="POST">
@@ -8,7 +8,7 @@
 	    <input type="password" name="password_confirmation">
 	    <input type="submit" value="Reset Password">
 	</form>
-	
+
 	@if(Session::has('error'))
 	    <div class="alert-box success">
 	        <h2>{{ Session::get('error') }}</h2>

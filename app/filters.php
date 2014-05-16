@@ -38,10 +38,10 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::guest('login');
 });
 
-Route::filter('admin', function()
+Route::filter('admins', function()
 {
 	if(!Sentry::check()) return Redirect::guest('login');
-	
+
 	else
 	{
 
@@ -50,7 +50,26 @@ Route::filter('admin', function()
 
 	    if (!$user->inGroup($admin))
 	    {
-	    	return Redirect::home();
+	    	return Redirect::to('login');
+	    }
+
+	}
+
+});
+
+Route::filter('users', function()
+{
+	if(!Sentry::check()) return Redirect::guest('login');
+
+	else
+	{
+
+		$user = Sentry::getUser();
+	    $users = Sentry::findGroupByName('Users');
+
+	    if (!$user->inGroup($users))
+	    {
+	    	return Redirect::to('login');
 	    }
 
 	}
@@ -76,7 +95,16 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Sentry::check()) return Redirect::to('/');
+	if (Sentry::check())
+	{
+		// Logged in successfully - redirect based on type of user
+		$user = Sentry::getUser();
+	    $admin = Sentry::findGroupByName('Admins');
+	    $users = Sentry::findGroupByName('Users');
+
+	    if ($user->inGroup($admin)) return Redirect::intended('admin');
+	    elseif ($user->inGroup($users)) return Redirect::intended('user');
+	}
 });
 
 // Route::filter('guest', function()

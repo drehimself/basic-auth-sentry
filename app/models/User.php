@@ -2,8 +2,9 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Cartalyst\Sentry\Users\Eloquent\User as SentryUser;
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
+class User extends SentryUser implements UserInterface, RemindableInterface {
 
 	/**
 	 * The database table used by the model.
@@ -11,10 +12,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-
-	protected $fillable = [
-		'username', 'email', 'password'
-	];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -82,11 +79,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getReminderEmail()
 	{
 		return $this->email;
-	}
-
-	public function setPasswordAttribute($password)
-	{
-		$this->attributes['password'] = Hash::make($password);
 	}
 
 }

@@ -1,11 +1,11 @@
-@extends('layout')
+@extends('master')
 
 @section('content')
 <!-- 	<form action="{{ action('RemindersController@postRemind') }}" method="POST">
 	    <input type="email" name="email">
 	    <input type="submit" value="Send Reminder">
 	</form> -->
-	
+
 	{{ Form::open(['action' => 'RemindersController@postRemind']) }}
 
 		<!-- Email field -->
@@ -27,7 +27,7 @@
 		@endif
 
 	{{ Form::close() }}
-	
+
 	@if(Session::has('error'))
 	    <div class="alert-box success">
 	        <h2>{{ Session::get('error') }}</h2>

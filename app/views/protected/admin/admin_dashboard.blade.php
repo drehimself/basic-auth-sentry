@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('protected.admin.master')
 
 @section('content')
 
@@ -8,10 +8,12 @@
 		</div>
 	@endif
 
-	{{ Sentry::check() ? "Welcome, " . Sentry::getUser()->first_name: "hi" }}
+	@if (Sentry::check())
+		<p>{{ "Welcome, " . Sentry::getUser()->first_name }}</p>
+	@endif
 
 	<br><br>
-	
+
 	<p>This is for admins only bitch!</p>
 
 @stop

@@ -32,7 +32,7 @@ class SessionsController extends \BaseController {
 		$this->loginForm->validate($input = Input::only('email', 'password'));
 
 		try
-		{			
+		{
 			Sentry::authenticate($input, Input::has('remember'));
 		}
 
@@ -46,7 +46,15 @@ class SessionsController extends \BaseController {
 		}
 
 		// Logged in successfully - redirect based on type of user
-		return Redirect::intended('/');
+		$user = Sentry::getUser();
+	    $admin = Sentry::findGroupByName('Admins');
+	    $users = Sentry::findGroupByName('Users');
+
+	    if ($user->inGroup($admin)) return Redirect::intended('admin');
+	    elseif ($user->inGroup($users)) return Redirect::intended('user');
+
+
+		// return Redirect::intended('/');
 
 	}
 

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Title</title>
+	<title>Stander User Page</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
