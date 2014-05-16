@@ -38,6 +38,25 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::guest('login');
 });
 
+Route::filter('admin', function()
+{
+	if(!Sentry::check()) return Redirect::guest('login');
+	
+	else
+	{
+
+		$user = Sentry::getUser();
+	    $admin = Sentry::findGroupByName('Admins');
+
+	    if (!$user->inGroup($admin))
+	    {
+	    	return Redirect::home();
+	    }
+
+	}
+
+});
+
 
 Route::filter('auth.basic', function()
 {

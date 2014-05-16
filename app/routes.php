@@ -20,4 +20,20 @@ Route::post('forgot_password','RemindersController@postRemind');
 Route::get('reset_password/{token}', 'RemindersController@getReset')->before('guest');;
 Route::post('reset_password/{token}', 'RemindersController@postReset');
 
+# Admin Routes
+Route::group(['before' => 'admin'],function()
+{
+	Route::get('/admin', ['as' => 'admin_dashboard', 'uses' => 'AdminDashboardController@getHome']);
+    Route::get('/admin/blah', function()
+    {
+        return 'blah';
+    });
+
+    Route::get('admin/blah2', function()
+    {
+        return 'blah2';
+    });
+});
+
+
 

@@ -31,26 +31,21 @@ class SessionsController extends \BaseController {
 	{
 		$this->loginForm->validate($input = Input::only('email', 'password'));
 
-
 		try
-		{
-			Sentry::authenticate($input, Input::get('remember') == 'remember');
+		{			
+			Sentry::authenticate($input, Input::has('remember'));
 		}
 
 		catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
 		{
-		    // Sometimes a user is found, however hashed credentials do
-		    // not match. Therefore a user technically doesn't exist
-		    // by those credentials. Check the error message returned
-		    // for more information.
 		   	return Redirect::back()->withInput()->withFlashMessage('Invalid credentials provided');
 		}
 		catch (\Cartalyst\Sentry\Users\UserNotActivatedException $e)
 		{
-		    	return Redirect::back()->withInput()->withFlashMessage('User Not Activated.');
+		   	return Redirect::back()->withInput()->withFlashMessage('User Not Activated.');
 		}
 
-		// Logged in successfully
+		// Logged in successfully - redirect based on type of user
 		return Redirect::intended('/');
 
 	}
