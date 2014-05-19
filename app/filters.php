@@ -54,6 +54,8 @@ Route::filter('admin', function()
     }
 });
 
+
+
 Route::filter('standardUser', function()
 {
 	$user = Sentry::getUser();
@@ -92,7 +94,18 @@ Route::filter('guest', function()
 	    $users = Sentry::findGroupByName('Users');
 
 	    if ($user->inGroup($admin)) return Redirect::intended('admin');
-	    elseif ($user->inGroup($users)) return Redirect::intended('user');
+	    elseif ($user->inGroup($users)) return Redirect::intended('/');
+	}
+});
+
+Route::filter('redirectAdmin', function()
+{
+	if (Sentry::check())
+	{
+		$user = Sentry::getUser();
+	    $admin = Sentry::findGroupByName('Admins');
+
+	    if ($user->inGroup($admin)) return Redirect::intended('admin');	    
 	}
 });
 

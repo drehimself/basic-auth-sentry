@@ -2,7 +2,7 @@
 
 
 # Static Pages
-Route::get('/', ['as' => 'home', 'uses' => 'PagesController@getHome']);
+Route::get('/', ['as' => 'home', 'uses' => 'PagesController@getHome'])->before('redirectAdmin');
 
 # Registration
 Route::get('/register', 'RegistrationController@create')->before('guest');

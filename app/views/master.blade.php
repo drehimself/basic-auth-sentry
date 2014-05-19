@@ -45,12 +45,19 @@
 		      </ul>
 		     
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="/register">Register</a></li>
-		        <li><a href="/login">Login</a></li>
+		      	@if (!Sentry::check())
+					<li><a href="/register">Register</a></li>
+					<li><a href="/login">Login</a></li>					
+				@else
+					<li><a href="/profile">Profile</a></li>
+					<li><a href="/logout">Logout</a></li>
+				@endif
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
+
+
 
 
 	</header>
