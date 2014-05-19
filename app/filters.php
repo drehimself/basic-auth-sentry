@@ -35,45 +35,34 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (!Sentry::check()) return Redirect::guest('login');
 });
 
-Route::filter('admins', function()
+// Route::filter('auth', function()
+// {
+// 	if (Auth::guest()) return Redirect::guest('login');
+// });
+
+Route::filter('admin', function()
 {
-	if(!Sentry::check()) return Redirect::guest('login');
+	$user = Sentry::getUser();
+    $admin = Sentry::findGroupByName('Admins');
 
-	else
-	{
-
-		$user = Sentry::getUser();
-	    $admin = Sentry::findGroupByName('Admins');
-
-	    if (!$user->inGroup($admin))
-	    {
-	    	return Redirect::to('login');
-	    }
-
-	}
-
+    if (!$user->inGroup($admin))
+    {
+    	return Redirect::to('login');
+    }
 });
 
-Route::filter('users', function()
+Route::filter('standardUser', function()
 {
-	if(!Sentry::check()) return Redirect::guest('login');
+	$user = Sentry::getUser();
+    $users = Sentry::findGroupByName('Users');
 
-	else
-	{
-
-		$user = Sentry::getUser();
-	    $users = Sentry::findGroupByName('Users');
-
-	    if (!$user->inGroup($users))
-	    {
-	    	return Redirect::to('login');
-	    }
-
-	}
-
+    if (!$user->inGroup($users))
+    {
+    	return Redirect::to('login');
+    }
 });
 
 

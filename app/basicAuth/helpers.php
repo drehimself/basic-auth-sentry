@@ -2,5 +2,5 @@
 
  function errors_for($attribute, $errors)
  {
- 	return $errors->first($attribute, '<span class="error">:message</span>');
+ 	return $errors->first($attribute, '<p class="text-danger">:message</p>');
  }

@@ -19,7 +19,6 @@ class SentryUserGroupSeeder extends Seeder {
 
 	    // Assign the groups to the users
 	    $userUser->addGroup($userGroup);
-	    //$adminUser->addGroup($userGroup);
 	    $adminUser->addGroup($adminGroup);
 	}
 

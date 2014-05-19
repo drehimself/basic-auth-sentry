@@ -33,15 +33,25 @@ class RegistrationController extends \BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::only('username', 'email', 'password', 'password_confirmation');
+		$input = Input::only('email', 'password', 'password_confirmation', 'first_name', 'last_name');
 
 		$this->registrationForm->validate($input);
 
-		$user = User::create($input);
+		$input = Input::only('email', 'password', 'first_name', 'last_name');
+		$input = array_add($input, 'activated', true);
 
-		Auth::login($user);
+		$user = Sentry::createUser($input);
 
-		return Redirect::home();
+		// Find the group using the group name
+    	$usersGroup = Sentry::findGroupByName('Users');
+
+    	// Assign the group to the user
+    	$user->addGroup($usersGroup);
+
+
+		//Auth::login($user);
+
+		return Redirect::to('login');
 	}
 
 

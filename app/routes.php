@@ -8,7 +8,6 @@ Route::get('/', ['as' => 'home', 'uses' => 'PagesController@getHome']);
 Route::get('/register', 'RegistrationController@create')->before('guest');
 Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
 
-
 # Authentication
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create'])->before('guest');
 Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy']);
@@ -21,7 +20,7 @@ Route::get('reset_password/{token}', 'RemindersController@getReset')->before('gu
 Route::post('reset_password/{token}', 'RemindersController@postReset');
 
 # Admin Routes
-Route::group(['before' => 'admins'], function()
+Route::group(['before' => 'auth|admin'], function()
 {
 	Route::get('/admin', ['as' => 'admin_dashboard', 'uses' => 'AdminController@getHome']);
     Route::get('/admin/blah', function()
@@ -40,8 +39,8 @@ Route::group(['before' => 'admins'], function()
     });
 });
 
-# User Routes
-Route::group(['before' => 'users'],function()
+# Standard User Routes
+Route::group(['before' => 'auth|standardUser'],function()
 {
 	Route::get('/user', ['as' => 'user_dashboard', 'uses' => 'UserController@getHome']);
     Route::get('/user/blah', function()

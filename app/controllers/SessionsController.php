@@ -38,11 +38,11 @@ class SessionsController extends \BaseController {
 
 		catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
 		{
-		   	return Redirect::back()->withInput()->withFlashMessage('Invalid credentials provided');
+		   	return Redirect::back()->withInput()->withErrorMessage('Invalid credentials provided');
 		}
 		catch (\Cartalyst\Sentry\Users\UserNotActivatedException $e)
 		{
-		   	return Redirect::back()->withInput()->withFlashMessage('User Not Activated.');
+		   	return Redirect::back()->withInput()->withErrorMessage('User Not Activated.');
 		}
 
 		// Logged in successfully - redirect based on type of user

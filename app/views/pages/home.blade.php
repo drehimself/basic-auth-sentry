@@ -3,10 +3,11 @@
 @section('content')
 
 
-	<h1>Landing Page</h1>
+	<div class="jumbotron">
+		<h1>Landing Page</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia perferendis id odit laudantium non blanditiis debitis repellat nulla accusamus cupiditate unde.</p>
+		<p><a href="/login" class="btn btn-success btn-lg" role="button">Login</a></p>
+	</div>
 
-	<p>
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, veniam earum aspernatur hic ullam culpa beatae ipsum placeat consequatur possimus. Eaque!
-	</p>
 
 @stop

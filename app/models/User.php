@@ -2,9 +2,8 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
-use Cartalyst\Sentry\Users\Eloquent\User as SentryUser;
 
-class User extends SentryUser implements UserInterface, RemindableInterface {
+class User extends Cartalyst\Sentry\Users\Eloquent\User implements UserInterface, RemindableInterface {
 
 	/**
 	 * The database table used by the model.
@@ -80,5 +79,10 @@ class User extends SentryUser implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+
+	public static function boot()
+    {
+        self::$hasher = new Cartalyst\Sentry\Hashing\NativeHasher;
+    }
 
 }

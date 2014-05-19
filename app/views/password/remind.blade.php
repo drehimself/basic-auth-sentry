@@ -1,44 +1,47 @@
 @extends('master')
 
 @section('content')
-<!-- 	<form action="{{ action('RemindersController@postRemind') }}" method="POST">
-	    <input type="email" name="email">
-	    <input type="submit" value="Send Reminder">
-	</form> -->
-
-	{{ Form::open(['action' => 'RemindersController@postRemind']) }}
-
-		<!-- Email field -->
-		<div class="form-group">
-			{{ Form::label('email', 'Email: ')}}
-			{{ Form::text('email', null, ['class' => 'form-control', 'required' => 'required'])}}
-			{{ errors_for('email', $errors) }}
+	
+		<div class="container">
+	    <div class="row">
+			<div class="col-md-6 col-md-offset-3">
+	    		<div class="panel panel-default">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">Password Reminder</h3>
+				 	</div>
+				  	<div class="panel-body">
+				    	{{ Form::open(['action' => 'RemindersController@postRemind']) }}
+	                    <fieldset>
+	                    	
+	                    	@if (Session::has('flash_message'))
+								<p style="padding:5px" class="bg-success text-success">{{ Session::get('flash_message') }}</p>
+							@endif
+							
+							@if (Session::has('error_message'))
+								<p style="padding:5px" class="bg-danger text-danger">{{ Session::get('error_message') }}</p>
+							@endif
+							
+				    	  	<!-- Email field -->
+							<div class="form-group">
+								{{ Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])}}
+								{{ errors_for('email', $errors) }}
+							</div>
+				    				
+				    		<!-- Submit field -->
+							<div class="form-group">
+								{{ Form::submit('Send Reminder', ['class' => 'btn btn btn-lg btn-primary btn-block']) }}
+							</div>
+				    	</fieldset>
+				      	{{ Form::close() }}
+				    </div>
+				</div>
+							
+			</div>
 		</div>
+	</div>
+	
 
-		<!-- Submit field -->
-		<div class="form-group">
-			{{ Form::submit('Send Reminder', ['class' => 'btn btn-primary']) }}
-		</div>
 
-		@if (Session::has('flash_message'))
-		<div class="form-group">
-			<p>{{ Session::get('flash_message') }}</p>
-		</div>
-		@endif
-
-	{{ Form::close() }}
-
-	@if(Session::has('error'))
-	    <div class="alert-box success">
-	        <h2>{{ Session::get('error') }}</h2>
-	    </div>
-	@endif
-
-	@if(Session::has('status'))
-	    <div class="alert-box success">
-	        <h2>{{ Session::get('status') }}</h2>
-	    </div>
-	@endif
 @stop
 
 
