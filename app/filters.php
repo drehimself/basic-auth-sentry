@@ -114,6 +114,16 @@ Route::filter('redirectAdmin', function()
 // 	if (Auth::check()) return Redirect::to('/');
 // });
 
+Route::filter('currentUser', function($route)
+{
+    if (!Sentry::check()) return Redirect::home();
+
+    if (Sentry::getUser()->id !== $route->parameter('profiles'))
+    {
+        return Redirect::home();
+    }
+});
+
 /*
 |--------------------------------------------------------------------------
 | CSRF Protection Filter

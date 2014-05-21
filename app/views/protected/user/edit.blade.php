@@ -5,11 +5,11 @@
 
 	@if (Session::has('flash_message'))
 		<div class="form-group">
-			<p>{{ Session::get('flash_message') }}</p>
+			<p style="padding: 5px" class="bg-success">{{ Session::get('flash_message') }}</p>
 		</div>
 	@endif
 
-	{{ Form::model($user, ['method' => 'PATCH', 'route' => ['profiles.update', 1]]) }}
+	{{ Form::model($user, ['method' => 'PATCH', 'route' => ['profiles.update', $user->id]]) }}
 
 		<!-- email Field -->
 		<div class="form-group">
@@ -36,8 +36,9 @@
 
 		<!-- Password field -->
 		<div class="form-group">
-			{{ Form::label('password', 'Password: (leave blank to NOT change)') }}
+			{{ Form::label('password', 'Password:') }}
 			{{ Form::password('password', ['class' => 'form-control']) }}
+			<p class="help-block">Leave password blank to NOT edit the password.</p>
 			{{ errors_for('password', $errors) }}
 		</div>
 
@@ -46,9 +47,6 @@
 			{{ Form::label('password_confirmation', 'Repeat Password:') }}
 			{{ Form::password('password_confirmation', ['class' => 'form-control'] )}}
 		</div>
-
-
-
 
 
 		<!-- Update Profile Field -->

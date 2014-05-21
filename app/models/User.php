@@ -85,4 +85,11 @@ class User extends Cartalyst\Sentry\Users\Eloquent\User implements UserInterface
         self::$hasher = new Cartalyst\Sentry\Hashing\NativeHasher;
     }
 
+    public function isCurrent()
+    {
+        if (!Sentry::check()) return false;
+
+        return Sentry::getUser()->id == $this->id;
+    }
+
 }

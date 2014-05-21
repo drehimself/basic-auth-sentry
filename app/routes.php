@@ -43,14 +43,15 @@ Route::group(['before' => 'auth|admin'], function()
 });
 
 # Standard User Routes
-Route::group(['before' => 'auth|standardUser'], function()
+Route::group(['before' => 'auth|standardUser|currentUser'], function()
 {
 	//Route::get('/user', ['as' => 'user_dashboard', 'uses' => 'StandardUserController@getHome']);
 	//Route::resource('profiles', 'UsersController');
-	// Route::get('/profiles/{id}', 'UsersController@show');
-	// Route::get('/profiles/{id}/edit', 'UsersController@edit');
-	// Route::patch('/profiles/{id}/update', 'UsersController@update');
-	Route::resource('profiles', 'UsersController', ['only' => ['show', 'edit', 'update']]);
+	// Route::get('/profiles/{id}', 'UsersController@show')->where('id', '[0-9]+');
+	// Route::get('/profiles/{id}/edit', 'UsersController@edit')->where('id', '[0-9]+');
+	// Route::put('/profiles/{id}/update', 'UsersController@update')->where('id', '[0-9]+');
+	 Route::resource('profiles', 'UsersController', ['only' => ['show', 'edit', 'update']]);
+    //Route::get('profiles/{email}', ['as' => 'profile', 'uses' => 'UsersController@show']);
     // Route::get('/user/blah', function()
     // {
     //     return 'blah';
