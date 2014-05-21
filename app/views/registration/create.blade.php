@@ -1,8 +1,10 @@
 @extends('master')
 
+@section('title', 'Register')
+
 @section('content')
 
-	
+
 		<div class="container">
 	    <div class="row">
 			<div class="col-md-6 col-md-offset-3">
@@ -13,19 +15,19 @@
 				  	<div class="panel-body">
 				    	{{ Form::open(['route' => 'registration.store']) }}
 	                    <fieldset>
-	                    	
+
 	                    	@if (Session::has('flash_message'))
 								<div class="form-group">
 									<p>{{ Session::get('flash_message') }}</p>
 								</div>
 							@endif
-	                    	
+
 				    	  	<!-- Email field -->
 							<div class="form-group">
 								{{ Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])}}
 								{{ errors_for('email', $errors) }}
 							</div>
-				    		
+
 							<!-- Password field -->
 							<div class="form-group">
 								{{ Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control', 'required' => 'required'])}}
@@ -54,21 +56,21 @@
 							<div class="form-group">
 								{{ Form::submit('Create Account', ['class' => 'btn btn-lg btn-primary btn-block']) }}
 							</div>
-				    		
-			
-				    		
+
+
+
 
 				    	</fieldset>
 				      	{{ Form::close() }}
 				    </div>
 				</div>
-				
+
 				<p style="text-align:center">Already have an account? <a href="/login">Login</a></p>
-				
+
 			</div>
 		</div>
 	</div>
 
-	
+
 
 @stop

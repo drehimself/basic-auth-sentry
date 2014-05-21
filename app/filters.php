@@ -105,7 +105,7 @@ Route::filter('redirectAdmin', function()
 		$user = Sentry::getUser();
 	    $admin = Sentry::findGroupByName('Admins');
 
-	    if ($user->inGroup($admin)) return Redirect::intended('admin');	    
+	    if ($user->inGroup($admin)) return Redirect::intended('admin');
 	}
 });
 
@@ -116,9 +116,10 @@ Route::filter('redirectAdmin', function()
 
 Route::filter('currentUser', function($route)
 {
+
     if (!Sentry::check()) return Redirect::home();
 
-    if (Sentry::getUser()->id !== $route->parameter('profiles'))
+    if (Sentry::getUser()->id != $route->parameter('profiles'))
     {
         return Redirect::home();
     }

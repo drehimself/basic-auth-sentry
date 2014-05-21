@@ -10,7 +10,7 @@
  	return Request::is($path) || Request::is($path . '/*') ? $active: '';
  }
 
- function link_to_profile($text='My Profile')
- {
- 	return link_to('/profile/' .  Sentry::getUser()->id, $text);
- }
+ // function link_to_profile($text='My Profile')
+ // {
+ // 	return link_to('/profile/' .  Sentry::getUser()->id, $text);
+ // }

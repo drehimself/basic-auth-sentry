@@ -95,7 +95,11 @@ class UsersController extends \BaseController {
 
 			$user->fill($input)->save();
 
-			return Redirect::route('profiles.edit', $user->id)->withFlashMessage('User has been updated successfully!');
+			dd('hi');
+
+			return Redirect::back()->withFlashMessage('User has been updated successfully!');
+
+			// return Redirect::route('profiles.edit', $user->id)->withFlashMessage('User has been updated successfully!');
 		}
 
 		else

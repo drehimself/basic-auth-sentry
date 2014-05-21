@@ -10,7 +10,9 @@
 	</ul>
 
 	@if(Sentry::check())
-		<a class="btn btn-primary" href="/profiles/{{$user->id}}/edit">Edit Profile</a>
+
+		<a class="btn btn-primary" href="{{Request::url()}}/edit">Edit Profile</a>
+
 	@endif
 
 @stop
