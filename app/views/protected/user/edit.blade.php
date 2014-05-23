@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Edit Profile')
+
 @section('content')
 	<h1>Edit Profile</h1>
 

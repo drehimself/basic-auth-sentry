@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'View Profile')
+
 @section('content')
 
 	<h1>{{ $user->first_name }}'s Profile</h1>

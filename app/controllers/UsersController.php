@@ -16,7 +16,7 @@ class UsersController extends \BaseController {
 	{
 		$this->usersEditForm = $usersEditForm;
 
-		//$this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
+		$this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
 	}
 
 	/**

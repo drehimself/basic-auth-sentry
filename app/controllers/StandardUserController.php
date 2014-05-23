@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends \BaseController {
+class StandardUserController extends \BaseController {
 
 
 
@@ -12,6 +12,11 @@ class UserController extends \BaseController {
 	public function getHome()
 	{
 		return View::make('protected.user.user_dashboard');
+	}
+
+	public function getUserProtected()
+	{
+		return View::make('protected.user.user_page_1');
 	}
 
 

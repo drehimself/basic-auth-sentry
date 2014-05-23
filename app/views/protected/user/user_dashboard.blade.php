@@ -12,6 +12,6 @@
 		<p>{{ "Welcome, " . Sentry::getUser()->first_name }}</p>
 	@endif
 
-	<p>This is for standard users only bitch!</p>
+	<p>This is for standard users only!</p>
 
 @stop

@@ -40,12 +40,11 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
 		        <li class="active"><a href="/">Home</a></li>
-		        <li><a href="#">Link 1</a></li>
-		        <li><a href="#">Link 2</a></li>
+
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
-		        <li class="{{ set_active('profiles') }}"><a href="/admin/profiles/{{Sentry::getUser()->id}}">My Profile</a></li>
+		        <!-- <li class="{{ set_active('profiles') }}"><a href="/admin/profiles/{{Sentry::getUser()->id}}">My Profile</a></li> -->
 		        <li><a href="/logout">Logout</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
