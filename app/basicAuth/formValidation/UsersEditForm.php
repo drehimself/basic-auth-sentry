@@ -9,7 +9,7 @@ class UsersEditForm extends FormValidator {
    */
   protected $update_rules =
     [
-      	'email' => 'required|email|unique:users',
+    'email' => 'required|email|unique:users',
 		'first_name' => 'required',
 		'last_name' => 'required',
 		'password' => 'confirmed|min:6',

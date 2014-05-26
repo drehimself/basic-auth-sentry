@@ -25,22 +25,6 @@ Route::post('forgot_password','RemindersController@postRemind')->before('guest')
 Route::get('reset_password/{token}', 'RemindersController@getReset')->before('guest');
 Route::post('reset_password/{token}', 'RemindersController@postReset')->before('guest');
 
-# Admin Routes
-Route::group(['before' => 'auth|admin'], function()
-{
-	Route::get('/admin', ['as' => 'admin_dashboard', 'uses' => 'AdminController@getHome']);
-    Route::get('/admin/blah', function()
-    {
-        return 'blah';
-    });
-
-    Route::get('admin/blah2', function()
-    {
-        return 'blah2';
-    });
-
-    Route::resource('admin/profiles', 'UsersController', ['only' => ['index', 'show', 'edit', 'update', 'destroy']]);
-});
 
 # Standard User Routes
 Route::group(['before' => 'auth|standardUser'], function()
@@ -52,6 +36,23 @@ Route::group(['before' => 'auth|standardUser'], function()
 	 Route::resource('profiles', 'UsersController', ['only' => ['show', 'edit', 'update']]);
 	 Route::get('userProtected', 'StandardUserController@getUserProtected');
 
+});
+
+# Admin Routes
+Route::group(['before' => 'auth|admin'], function()
+{
+    Route::get('/admin', ['as' => 'admin_dashboard', 'uses' => 'AdminController@getHome']);
+    Route::get('/admin/blah', function()
+    {
+        return 'blah';
+    });
+
+    Route::get('admin/blah2', function()
+    {
+        return 'blah2';
+    });
+
+    Route::resource('admin/profiles', 'AdminUsersController', ['only' => ['index', 'show', 'edit', 'update', 'destroy']]);
 });
 
 

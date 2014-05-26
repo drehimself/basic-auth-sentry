@@ -1,5 +1,7 @@
 @extends('protected.admin.master')
 
+@section('title', 'Admin Dashboard')
+
 @section('content')
 
 	@if (Session::has('flash_message'))
@@ -16,5 +18,6 @@
 		<h1>Admin Page</h1>
 		<p>This page is for admins only!</p>
 	</div>
+	
 
 @stop

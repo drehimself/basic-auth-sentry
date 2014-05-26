@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Title</title>
+	<title>@yield('title') - Admin - Basic Auth Sentry</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 
@@ -39,12 +39,14 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="/">Home</a></li>
+		        <li class="{{ set_active_admin('admin') }}"><a href="/">Home</a></li>
+  		        <li class="{{ set_active_admin('admin/profiles') }}"><a href="/admin/profiles">List Users</a></li>
+		        
 
 		      </ul>
 
 		      <ul class="nav navbar-nav navbar-right">
-		        <!-- <li class="{{ set_active('profiles') }}"><a href="/admin/profiles/{{Sentry::getUser()->id}}">My Profile</a></li> -->
+
 		        <li><a href="/logout">Logout</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->

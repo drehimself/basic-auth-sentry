@@ -19,35 +19,6 @@ class UsersController extends \BaseController {
 		$this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		return 'return all users';
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('protected.user.profile');
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
 
 	/**
 	 * Display the specified resource.
@@ -60,7 +31,7 @@ class UsersController extends \BaseController {
 		$user = User::findOrFail($id);
 
 		return View::make('protected.user.show')->withUser($user);
-		//return 'show profile ' . $id;
+		
 	}
 
 	/**
@@ -91,48 +62,29 @@ class UsersController extends \BaseController {
 		{
 			$input = Input::only('email', 'first_name', 'last_name');
 
-			$this->usersEditForm->validateUpdate(Request::segment(2), $input);
+			$this->usersEditForm->validateUpdate($user->id, $input);
 
 			$user->fill($input)->save();
 
-			dd('hi');
-
-			return Redirect::back()->withFlashMessage('User has been updated successfully!');
-
-			// return Redirect::route('profiles.edit', $user->id)->withFlashMessage('User has been updated successfully!');
+			return Redirect::route('profiles.edit', $user->id)->withFlashMessage('User has been updated successfully!');
 		}
 
 		else
 		{
 			$input = Input::only('email', 'first_name', 'last_name', 'password', 'password_confirmation');
 
-			$this->usersEditForm->validateUpdate(Request::segment(2), $input);
+			$this->usersEditForm->validateUpdate($user->id, $input);
 
 			$input = Input::only('email', 'first_name', 'last_name', 'password');
 
 			$user->fill($input)->save();
 
-			// $user->email = Input::get('email');
-			// $user->first_name = Input::get('first_name');
-			// $user->last_name = Input::get('last_name');
-			// $user->password = Input::get('password');
-
 			$user->save();
 
 			return Redirect::route('profiles.edit', $user->id)->withFlashMessage('User (and password) has been updated successfully!');
-
 		}
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+
 
 }

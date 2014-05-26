@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Registered Users')
+
 @section('content')
 
 	@if (Session::has('flash_message'))
