@@ -1,16 +1,23 @@
 <?php
 
+use basicAuth\Repo\UserRepositoryInterface;
 use basicAuth\formValidation\RegistrationForm;
 
 class RegistrationController extends \BaseController {
+
+	/**
+	 * @var $user
+	 */
+	protected $user;
 
 	/**
 	 * @var RegistrationForm
 	 */
 	private $registrationForm;
 
-	function __construct(RegistrationForm $registrationForm)
+	function __construct(UserRepositoryInterface $user, RegistrationForm $registrationForm)
 	{
+		$this->user = $user;
 		$this->registrationForm = $registrationForm;
 	}
 
@@ -40,7 +47,7 @@ class RegistrationController extends \BaseController {
 		$input = Input::only('email', 'password', 'first_name', 'last_name');
 		$input = array_add($input, 'activated', true);
 
-		$user = Sentry::createUser($input);
+		$user = $this->user->create($input);
 
 		// Find the group using the group name
     	$usersGroup = Sentry::findGroupByName('Users');
@@ -48,10 +55,7 @@ class RegistrationController extends \BaseController {
     	// Assign the group to the user
     	$user->addGroup($usersGroup);
 
-
-		//Auth::login($user);
-
-		return Redirect::to('login');
+		return Redirect::to('login')->withFlashMessage('User Successfully Created!');
 	}
 
 

@@ -1,8 +1,14 @@
 <?php
 
+use basicAuth\Repo\UserRepositoryInterface;
 use basicAuth\formValidation\UsersEditForm;
 
 class UsersController extends \BaseController {
+
+	/**
+	 * @var $user
+	 */
+	protected $user;
 
 	/**
 	* @var usersEditForm
@@ -12,8 +18,9 @@ class UsersController extends \BaseController {
 	/**
 	* @param UsersEditForm $usersEditForm
 	*/
-	function __construct(UsersEditForm $usersEditForm)
+	function __construct(UserRepositoryInterface $user, UsersEditForm $usersEditForm)
 	{
+		$this->user = $user;
 		$this->usersEditForm = $usersEditForm;
 
 		$this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
@@ -28,10 +35,11 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$user = User::findOrFail($id);
+		// $user = User::findOrFail($id);
+		$user = $this->user->find($id);
 
-		return View::make('protected.user.show')->withUser($user);
-		
+		return View::make('protected.standardUser.show')->withUser($user);
+
 	}
 
 	/**
@@ -42,9 +50,10 @@ class UsersController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = User::findOrFail($id);
+		// $user = User::findOrFail($id);
+		$user = $this->user->find($id);
 
-		return View::make('protected.user.edit')->withUser($user);
+		return View::make('protected.standardUser.edit')->withUser($user);
 	}
 
 	/**
@@ -56,7 +65,8 @@ class UsersController extends \BaseController {
 	public function update($id)
 	{
 
-		$user = User::findOrFail($id);
+		// $user = User::findOrFail($id);
+		$user = $this->user->find($id);
 
 		if (! Input::has("password"))
 		{

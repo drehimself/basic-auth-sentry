@@ -1,8 +1,14 @@
 <?php
 
+use basicAuth\Repo\UserRepositoryInterface;
 use basicAuth\formValidation\AdminUsersEditForm;
 
 class AdminUsersController extends \BaseController {
+
+	/**
+	 * @var $user
+	 */
+	protected $user;
 
 	/**
 	* @var adminUsersEditForm
@@ -12,8 +18,9 @@ class AdminUsersController extends \BaseController {
 	/**
 	* @param AdminUsersEditForm $AdminUsersEditForm
 	*/
-	function __construct(AdminUsersEditForm $adminUsersEditForm)
+	function __construct(UserRepositoryInterface $user, AdminUsersEditForm $adminUsersEditForm)
 	{
+		$this->user = $user;
 		$this->adminUsersEditForm = $adminUsersEditForm;
 
 		//$this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
@@ -26,7 +33,7 @@ class AdminUsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = User::all();
+		$users = $this->user->getAll();
 		$admin = Sentry::findGroupByName('Admins');
 		return View::make('protected.admin.list_users')->withUsers($users)->withAdmin($admin);
 	}
@@ -40,7 +47,7 @@ class AdminUsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$user = User::findOrFail($id);
+		$user = $this->user->find($id);
 
 		$user_group = $user->getGroups()->first()->name;
 
@@ -59,7 +66,7 @@ class AdminUsersController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user = User::findOrFail($id);
+		$user = $this->user->find($id);
 
 		$groups = Sentry::findAllGroups();
 
@@ -83,7 +90,7 @@ class AdminUsersController extends \BaseController {
 	public function update($id)
 	{
 
-		$user = User::findOrFail($id);
+		$user = $this->user->find($id);
 
 
 		if (! Input::has("password"))
@@ -96,7 +103,8 @@ class AdminUsersController extends \BaseController {
 
 			$user->fill($input)->save();
 
-			$user->updateGroup(Input::get('account_type'));
+			$this->user->updateGroup($id, Input::get('account_type'));
+
 
 			return Redirect::route('admin.profiles.edit', $user->id)->withFlashMessage('User has been updated successfully!');
 		}
@@ -113,7 +121,7 @@ class AdminUsersController extends \BaseController {
 
 			$user->save();
 
-			$user->updateGroup(Input::get('account_type'));
+			$this->user->updateGroup($id, Input::get('account_type'));
 
 			return Redirect::route('admin.profiles.edit', $user->id)->withFlashMessage('User (and password) has been updated successfully!');
 

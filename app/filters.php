@@ -98,6 +98,11 @@ Route::filter('guest', function()
 	}
 });
 
+// Route::filter('guest', function()
+// {
+// 	if (Auth::check()) return Redirect::to('/');
+// });
+
 Route::filter('redirectAdmin', function()
 {
 	if (Sentry::check())
@@ -109,10 +114,7 @@ Route::filter('redirectAdmin', function()
 	}
 });
 
-// Route::filter('guest', function()
-// {
-// 	if (Auth::check()) return Redirect::to('/');
-// });
+
 
 Route::filter('currentUser', function($route)
 {

@@ -54,8 +54,6 @@ class SessionsController extends \BaseController {
 	    elseif ($user->inGroup($users)) return Redirect::intended('/');
 
 
-		// return Redirect::intended('/');
-
 	}
 
 
@@ -67,7 +65,6 @@ class SessionsController extends \BaseController {
 	 */
 	public function destroy($id=null)
 	{
-		//Auth::logout();
 		Sentry::logout();
 
 		return Redirect::home();
