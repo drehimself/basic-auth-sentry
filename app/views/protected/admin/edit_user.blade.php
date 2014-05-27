@@ -11,11 +11,12 @@
 		</div>
 	@endif
 
-	{{ Form::model($user, ['method' => 'PATCH', 'route' => ['profiles.update', $user->id]]) }}
-	
+	{{ Form::model($user, ['method' => 'PATCH', 'route' => ['admin.profiles.update', $user->id]]) }}
+
 		<div class="form-group">
 			{{ Form::label('account_type', 'Account Type:') }}
 			{{ Form::select('account_type', $groups, $user_group, ['class' => 'form-control']) }}
+			{{ errors_for('account_type', $errors) }}
 		</div>
 
 		<!-- email Field -->

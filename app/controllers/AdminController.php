@@ -12,7 +12,7 @@ class AdminController extends \BaseController {
 	{
 		$users = User::all();
 		$admin = Sentry::findGroupByName('Admins');
-		return View::make('protected.admin.admin_dashboard')->withUsers($users)->withAdmin($admin);
+		return View::make('protected.admin.admin_dashboard');
 	}
 
 

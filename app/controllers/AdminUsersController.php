@@ -1,20 +1,20 @@
 <?php
 
-use basicAuth\formValidation\UsersEditForm;
+use basicAuth\formValidation\AdminUsersEditForm;
 
 class AdminUsersController extends \BaseController {
 
 	/**
-	* @var usersEditForm
+	* @var adminUsersEditForm
 	*/
-	protected $usersEditForm;
+	protected $adminUsersEditForm;
 
 	/**
-	* @param UsersEditForm $usersEditForm
+	* @param AdminUsersEditForm $AdminUsersEditForm
 	*/
-	function __construct(UsersEditForm $usersEditForm)
+	function __construct(AdminUsersEditForm $adminUsersEditForm)
 	{
-		$this->usersEditForm = $usersEditForm;
+		$this->adminUsersEditForm = $adminUsersEditForm;
 
 		//$this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
 	}
@@ -48,7 +48,7 @@ class AdminUsersController extends \BaseController {
 
 
 		return View::make('protected.admin.show_user')->withUser($user)->withUserGroup($user_group);
-		
+
 	}
 
 	/**
@@ -68,7 +68,7 @@ class AdminUsersController extends \BaseController {
 		$array_groups = [];
 
 		foreach ($groups as $group) {
-			$array_groups = array_add($array_groups, $group->id, $group->name);	
+			$array_groups = array_add($array_groups, $group->id, $group->name);
 		}
 
 		return View::make('protected.admin.edit_user', ['user' => $user, 'groups' => $array_groups, 'user_group' =>$user_group]);
@@ -86,29 +86,34 @@ class AdminUsersController extends \BaseController {
 		$user = User::findOrFail($id);
 
 
-
 		if (! Input::has("password"))
 		{
+			$input = Input::only('account_type' , 'email', 'first_name', 'last_name');
+
+			$this->adminUsersEditForm->validateUpdate($user->id, $input);
+
 			$input = Input::only('email', 'first_name', 'last_name');
 
-			$this->usersEditForm->validateUpdate($user->id, $input);
-
 			$user->fill($input)->save();
+
+			$user->updateGroup(Input::get('account_type'));
 
 			return Redirect::route('admin.profiles.edit', $user->id)->withFlashMessage('User has been updated successfully!');
 		}
 
 		else
 		{
-			$input = Input::only('email', 'first_name', 'last_name', 'password', 'password_confirmation');
+			$input = Input::only('account_type', 'email', 'first_name', 'last_name', 'password', 'password_confirmation');
 
-			$this->usersEditForm->validateUpdate($user->id, $input);
+			$this->adminUsersEditForm->validateUpdate($user->id, $input);
 
 			$input = Input::only('email', 'first_name', 'last_name', 'password');
 
 			$user->fill($input)->save();
 
 			$user->save();
+
+			$user->updateGroup(Input::get('account_type'));
 
 			return Redirect::route('admin.profiles.edit', $user->id)->withFlashMessage('User (and password) has been updated successfully!');
 

@@ -92,4 +92,12 @@ class User extends Cartalyst\Sentry\Users\Eloquent\User implements UserInterface
         return Sentry::getUser()->id == $this->id;
     }
 
+    public function updateGroup($group_id)
+    {
+    	DB::table('users_groups')
+            ->where('user_id', $this->id)
+            ->update(array('group_id' => $group_id));
+
+    }
+
 }
