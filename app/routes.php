@@ -12,8 +12,11 @@ Route::group(['before' => 'redirectAdmin'], function()
 });
 
 # Registration
-Route::get('/register', 'RegistrationController@create')->before('guest');
-Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store'])->before('guest');
+Route::group(['before' => 'guest'], function()
+{
+	Route::get('/register', 'RegistrationController@create');
+	Route::post('/register', ['as' => 'registration.store', 'uses' => 'RegistrationController@store']);
+});
 
 # Authentication
 Route::get('login', ['as' => 'login', 'uses' => 'SessionsController@create'])->before('guest');
@@ -21,10 +24,13 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'SessionsController@destroy'])
 Route::resource('sessions', 'SessionsController' , ['only' => ['create','store','destroy']]);
 
 # Forgotten Password
-Route::get('forgot_password', 'RemindersController@getRemind')->before('guest');
-Route::post('forgot_password','RemindersController@postRemind')->before('guest');
-Route::get('reset_password/{token}', 'RemindersController@getReset')->before('guest');
-Route::post('reset_password/{token}', 'RemindersController@postReset')->before('guest');
+Route::group(['before' => 'guest'], function()
+{
+	Route::get('forgot_password', 'RemindersController@getRemind');
+	Route::post('forgot_password','RemindersController@postRemind');
+	Route::get('reset_password/{token}', 'RemindersController@getReset');
+	Route::post('reset_password/{token}', 'RemindersController@postReset');
+});
 
 
 # Standard User Routes
