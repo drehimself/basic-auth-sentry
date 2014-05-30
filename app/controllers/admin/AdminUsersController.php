@@ -99,7 +99,7 @@ class AdminUsersController extends \BaseController {
 
 			$this->adminUsersEditForm->validateUpdate($user->id, $input);
 
-			$input = Input::only('email', 'first_name', 'last_name');
+			$input = array_except($input, ['account_type']);
 
 			$user->fill($input)->save();
 
@@ -115,7 +115,7 @@ class AdminUsersController extends \BaseController {
 
 			$this->adminUsersEditForm->validateUpdate($user->id, $input);
 
-			$input = Input::only('email', 'first_name', 'last_name', 'password');
+			$input = array_except($input, ['account_type', 'password_confirmation']);
 
 			$user->fill($input)->save();
 

@@ -85,7 +85,7 @@ class UsersController extends \BaseController {
 
 			$this->usersEditForm->validateUpdate($user->id, $input);
 
-			$input = Input::only('email', 'first_name', 'last_name', 'password');
+			$input = array_except($input, ['password_confirmation']);
 
 			$user->fill($input)->save();
 
