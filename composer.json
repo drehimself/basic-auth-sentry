@@ -1,6 +1,6 @@
 {
 	"require": {
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.2.*",
 		"cartalyst/sentry": "2.1.*",
 		"laracasts/validation": "~1.0"
 	},
