@@ -97,7 +97,7 @@ class AdminUsersController extends \BaseController {
 		{
 			$input = Input::only('account_type' , 'email', 'first_name', 'last_name');
 
-			$this->adminUsersEditForm->validateUpdate($user->id, $input);
+			$this->adminUsersEditForm->excludeUserId($user->id)->validate($input);
 
 			$input = array_except($input, ['account_type']);
 
@@ -113,7 +113,7 @@ class AdminUsersController extends \BaseController {
 		{
 			$input = Input::only('account_type', 'email', 'first_name', 'last_name', 'password', 'password_confirmation');
 
-			$this->adminUsersEditForm->validateUpdate($user->id, $input);
+			$this->adminUsersEditForm->excludeUserId($user->id)->validate($input);
 
 			$input = array_except($input, ['account_type', 'password_confirmation']);
 

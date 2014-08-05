@@ -7,7 +7,7 @@ class UsersEditForm extends FormValidator {
   /**
    * @var array
    */
-  protected $update_rules =
+  protected $rules =
     [
     'email' => 'required|email|unique:users',
 		'first_name' => 'required',
@@ -15,22 +15,15 @@ class UsersEditForm extends FormValidator {
 		'password' => 'confirmed|min:6',
     ];
 
-  /**
-   * @var array
-   */
-  protected $rules = [];
-
 
   /**
    * @param int $id
-   * @param array $input
-   * @return mixed
    */
-  public function validateUpdate($id, array $input)
+  public function excludeUserId($id)
   {
-    $this->update_rules['email'] = "required|email|unique:users,email,$id";
-    $this->rules = $this->update_rules;
-    return $this->validate($input);
+    $this->rules['email'] = "required|email|unique:users,email,$id";
+
+    return $this;
   }
 
 

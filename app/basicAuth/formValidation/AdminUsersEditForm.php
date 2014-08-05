@@ -7,7 +7,7 @@ class AdminUsersEditForm extends FormValidator {
   /**
    * @var array
    */
-  protected $update_rules =
+  protected $rules =
     [
     'account_type' => 'integer|between:1,2',
     'email' => 'required|email|unique:users',
@@ -17,22 +17,16 @@ class AdminUsersEditForm extends FormValidator {
     ];
 
   /**
-   * @var array
-   */
-  protected $rules = [];
-
-
-  /**
    * @param int $id
-   * @param array $input
-   * @return mixed
    */
-  public function validateUpdate($id, array $input)
+  public function excludeUserId($id)
   {
-    $this->update_rules['email'] = "required|email|unique:users,email,$id";
-    $this->rules = $this->update_rules;
-    return $this->validate($input);
+    $this->rules['email'] = "required|email|unique:users,email,$id";
+
+    return $this;
   }
+
+
 
 
 

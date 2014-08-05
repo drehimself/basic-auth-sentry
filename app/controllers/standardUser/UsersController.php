@@ -72,7 +72,7 @@ class UsersController extends \BaseController {
 		{
 			$input = Input::only('email', 'first_name', 'last_name');
 
-			$this->usersEditForm->validateUpdate($user->id, $input);
+			$this->usersEditForm->excludeUserId($user->id)->validate($input);
 
 			$user->fill($input)->save();
 
@@ -83,7 +83,7 @@ class UsersController extends \BaseController {
 		{
 			$input = Input::only('email', 'first_name', 'last_name', 'password', 'password_confirmation');
 
-			$this->usersEditForm->validateUpdate($user->id, $input);
+			$this->usersEditForm->excludeUserId($user->id)->validate($input);
 
 			$input = array_except($input, ['password_confirmation']);
 
