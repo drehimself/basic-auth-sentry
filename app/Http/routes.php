@@ -21,6 +21,10 @@ Route::post('forgot_password','Auth\PasswordController@postEmail');
 Route::get('reset_password/{token}', 'Auth\PasswordController@getReset');
 Route::post('reset_password/{token}', 'Auth\PasswordController@postReset');
 
+# Standard User Routes
+Route::get('userProtected', 'StandardUser\StandardUserController@getUserProtected');
+Route::resource('profiles', 'StandardUser\UsersController', ['only' => ['show', 'edit', 'update']]);
+
 
 // Route::get('/', 'WelcomeController@index');
 

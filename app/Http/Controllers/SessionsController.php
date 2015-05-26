@@ -24,7 +24,32 @@ class SessionsController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		//validation here, use Form Request
+
+		$input = \Input::only('email', 'password');
+
+		try
+		{
+			\Sentry::authenticate($input, \Input::has('remember'));
+		}
+
+		catch (\Cartalyst\Sentry\Users\UserNotFoundException $e)
+		{
+		   	return redirect()->back()->withInput()->withErrorMessage('Invalid credentials provided');
+		}
+		catch (\Cartalyst\Sentry\Users\UserNotActivatedException $e)
+		{
+		   	return redirect()->back()->withInput()->withErrorMessage('User Not Activated.');
+		}
+
+		// Logged in successfully - redirect based on type of user
+		$user = \Sentry::getUser();
+	    $admin = \Sentry::findGroupByName('Admins');
+	    $users = \Sentry::findGroupByName('Users');
+
+	    if ($user->inGroup($admin)) return redirect()->intended('admin');
+	    elseif ($user->inGroup($users)) return redirect()->intended('/');
+
 	}
 
 	/**
@@ -33,9 +58,9 @@ class SessionsController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id=null)
 	{
-		Sentry::logout();
+		\Sentry::logout();
 
 		//return Redirect::home();
 
