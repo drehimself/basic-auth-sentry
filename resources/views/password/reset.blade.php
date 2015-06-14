@@ -16,34 +16,38 @@
                         <fieldset>
 
                             @if (Session::has('flash_message'))
-                                <p style="padding:5px" class="bg-success text-success">{{ Session::get('flash_message') }}</p>
+                                <div class="alert alert-success">
+                                    {{ Session::get('flash_message') }}
+                                </div>
                             @endif
 
                             @if (Session::has('error_message'))
-                                <p style="padding:5px" class="bg-danger text-danger">{{ Session::get('error_message') }}</p>
+                                <div class="alert alert-daner">
+                                    {{ Session::get('error_message') }}
+                                </div>
                             @endif
 
                             <!-- Email field -->
                             <div class="form-group">
                                 {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])!!}
-                                {{ errors_for('email', $errors) }}
+                                {!! errors_for('email', $errors) !!}
                             </div>
 
                             <!-- Password field -->
                             <div class="form-group">
                                 {!! Form::password('password', ['placeholder' => 'Password','class' => 'form-control', 'required' => 'required'])!!}
-                                {{ errors_for('password', $errors) }}
+                                {!! errors_for('password', $errors) !!}
                             </div>
 
                             <!-- Password confirmation field -->
                             <div class="form-group">
                                 {!! Form::password('password_confirmation', ['placeholder' => 'Password confirmation','class' => 'form-control', 'required' => 'required'])!!}
-                                {{ errors_for('password', $errors) }}
+                                {!! errors_for('password', $errors) !!}
                             </div>
 
                             <!-- Hidden Token field -->
                             {!! Form::hidden('token', $token )!!}
-                            {{ errors_for('email', $errors) }}
+
 
                             <!-- Submit field -->
                             <div class="form-group">

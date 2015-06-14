@@ -16,7 +16,9 @@
                         <fieldset>
 
                             @if (Session::has('flash_message'))
-                                <p style="padding:5px" class="bg-success text-success">{{ Session::get('flash_message') }}</p>
+                                <div class="alert alert-success">
+                                    {{ Session::get('flash_message') }}
+                                </div>
                             @endif
 
                             @if (Session::has('errors'))
