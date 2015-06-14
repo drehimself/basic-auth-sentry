@@ -24,6 +24,7 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     protected $redirectPath = "login";
+    protected $subject = "Your Password Reset Link for website.com";
 
     /**
      * Create a new password controller instance.
