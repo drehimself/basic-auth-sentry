@@ -8,7 +8,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends \Cartalyst\Sentry\Users\Eloquent\User implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
 
@@ -32,4 +32,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public static function boot()
+    {
+        self::$hasher = new \Cartalyst\Sentry\Hashing\NativeHasher;
+    }
+
+    public function isCurrent()
+    {
+        if (!Sentry::check()) return false;
+
+        return Sentry::getUser()->id == $this->id;
+    }
 }

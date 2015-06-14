@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use \User;
+use App\User;
 use \DB;
 use \Sentry;
 
