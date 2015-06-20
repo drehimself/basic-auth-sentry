@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Sentry;
 
 class UsersEditFormRequest extends Request
 {
@@ -13,7 +14,10 @@ class UsersEditFormRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        $user = Sentry::getUser();
+        $routeID = ($this->route('profiles'));
+
+        return $user->id == $routeID;
     }
 
     /**

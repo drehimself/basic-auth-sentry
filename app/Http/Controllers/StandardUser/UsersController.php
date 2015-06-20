@@ -23,6 +23,7 @@ class UsersController extends Controller
         $this->user = $user;
 
         // $this->beforeFilter('currentUser', ['only' => ['show', 'edit', 'update']]);
+        $this->middleware('notCurrentUser', ['only' => ['show', 'edit', 'update']]);
     }
 
     /**
