@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Sentry;
 
-class SentryAuthenticateUser
+class SentryStandardUser
 {
     /**
      * Handle an incoming request.
@@ -15,14 +16,12 @@ class SentryAuthenticateUser
      */
     public function handle($request, Closure $next)
     {
-        if (!Sentry::check()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return redirect()->guest('auth/login');
-            }
-        }
+        $user = Sentry::getUser();
+        $users = Sentry::findGroupByName('Users');
 
+        if (!$user->inGroup($users)) {
+            return redirect('login');
+        }
         return $next($request);
     }
 }

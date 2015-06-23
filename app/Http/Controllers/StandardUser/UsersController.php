@@ -7,7 +7,6 @@ use App\Http\Requests;
 use App\Http\Requests\UsersEditFormRequest;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
-use basicAuth\formValidation\UsersEditForm;
 
 class UsersController extends Controller
 {
@@ -76,11 +75,11 @@ class UsersController extends Controller
                              ->withFlashMessage('User has been updated successfully!');
 
         } else {
-            $input = $request->only('email', 'first_name', 'last_name', 'password', 'password_confirmation');
+            $input = $request->only('email', 'first_name', 'last_name', 'password');
 
             //$this->usersEditForm->excludeUserId($user->id)->validate($input);
 
-            $input = array_except($input, ['password_confirmation']);
+            // $input = array_except($input, ['password_confirmation']);
 
             $user->fill($input)->save();
 
