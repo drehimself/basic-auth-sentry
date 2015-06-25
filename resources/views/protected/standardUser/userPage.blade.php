@@ -4,8 +4,8 @@
 
 @section('content')
 
-    @if (Session::has('flash_message'))
-            <p>{{ Session::get('flash_message') }}</p>
+    @if (session()->has('flash_message'))
+            <p>{{ session()->get('flash_message') }}</p>
     @endif
 
     @if (Sentry::check())

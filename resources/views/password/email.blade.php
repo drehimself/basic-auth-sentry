@@ -15,14 +15,10 @@
                         {!! Form::open(['action' => 'Auth\PasswordController@postEmail']) !!}
                         <fieldset>
 
-                            @if (Session::has('flash_message'))
+                            @if (session()->has('flash_message'))
                                 <div class="alert alert-success">
-                                    {{ Session::get('flash_message') }}
+                                    {{ session()->get('flash_message') }}
                                 </div>
-                            @endif
-
-                            @if (Session::has('errors'))
-                                {{-- <p style="padding:5px" class="bg-danger text-danger">{{ Session::get('error_message') }}</p> --}}
                             @endif
 
                             @if (count($errors) > 0)

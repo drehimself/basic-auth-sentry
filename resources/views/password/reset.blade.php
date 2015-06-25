@@ -15,15 +15,15 @@
                         {!! Form::open(['action' => 'Auth\PasswordController@postReset']) !!}
                         <fieldset>
 
-                            @if (Session::has('flash_message'))
+                            @if (session()->has('flash_message'))
                                 <div class="alert alert-success">
-                                    {{ Session::get('flash_message') }}
+                                    {{ session()->get('flash_message') }}
                                 </div>
                             @endif
 
-                            @if (Session::has('error_message'))
+                            @if (session()->has('error_message'))
                                 <div class="alert alert-daner">
-                                    {{ Session::get('error_message') }}
+                                    {{ session()->get('error_message') }}
                                 </div>
                             @endif
 
@@ -60,12 +60,5 @@
             </div>
         </div>
     </div>
-
-
-    @if(Session::has('error'))
-        <div class="alert-box success">
-            <h2>{{ Session::get('error') }}</h2>
-        </div>
-    @endif
 
 @endsection

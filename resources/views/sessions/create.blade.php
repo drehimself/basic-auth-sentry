@@ -15,15 +15,15 @@
                         {!! Form::open(['route' => 'sessions.store']) !!}
                         <fieldset>
 
-                            @if (Session::has('flash_message'))
+                            @if (session()->has('flash_message'))
                                 <div class="alert alert-success">
-                                    {{ Session::get('flash_message') }}
+                                    {{ session()->get('flash_message') }}
                                 </div>
                             @endif
 
-                            @if (Session::has('error_message'))
+                            @if (session()->has('error_message'))
                                 <div class="alert alert-danger">
-                                    {{ Session::get('error_message') }}
+                                    {{ session()->get('error_message') }}
                                 </div>
                             @endif
 

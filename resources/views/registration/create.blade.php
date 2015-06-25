@@ -16,9 +16,9 @@
                         {!! Form::open(['route' => 'registration.store']) !!}
                         <fieldset>
 
-                            @if (Session::has('flash_message'))
+                            @if (session()->has('flash_message'))
                                 <div class="form-group">
-                                    <p>{{ Session::get('flash_message') }}</p>
+                                    <p>{{ session()->get('flash_message') }}</p>
                                 </div>
                             @endif
 
