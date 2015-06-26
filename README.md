@@ -6,7 +6,7 @@ Updated to Laravel 5.1. My personal starting point for any Laravel app that requ
 
 ## Installation
 
-This is just local installation using something like MAMP/WAMP or xampp. Of coure you are free to use homestead.
+This is just local installation using something like MAMP/WAMP or xampp. Of course you are free to use homestead if you like.
 
 1. clone the repo and cd into it
 2. `composer install`
