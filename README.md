@@ -15,5 +15,6 @@ This is just local installation using something like MAMP/WAMP or xampp. Of cour
 5. `php artisan key:generate`
 6. `php artisan migrate`
 7. `php artisan db:seed`
-8. `php artisan serve`
-9. Visit [localhost:8000](http://localhost:8000) in your browser
+8. (Optional) Run `vendor/bin/phpunit` to run some functional tests I have written. Have a look at them in the `tests/functional` folder.
+9. `php artisan serve`
+10. Visit [localhost:8000](http://localhost:8000) in your browser
