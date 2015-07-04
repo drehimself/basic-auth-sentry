@@ -1,5 +1,7 @@
 # Basic Authentication with Sentry
 
+[See Sentinel version here](https://github.com/drehimself/basic-auth-sentinel).
+
 Updated to Laravel 5.1. My personal starting point for any Laravel app that requires standard users and admin users. Also has editable profiles (standard users can edit their own profile, admin users can edit all profiles).
 
 [See demo here](http://authdemo.andremadarang.com/) (demo is Laravel 4 version but it works exactly the same) or install locally with instructions below.
